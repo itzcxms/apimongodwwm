@@ -1,4 +1,4 @@
-const Sonde = require("../models/sondeModel");
+const Sonde = require("../models/Sonde");
 const mongoose = require("mongoose");
 
 class SondeController {
