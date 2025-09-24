@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 
 /* Création d'une classe de gestion de la DB mongo */
 
+console.log("MONGODB_URI =", process.env.MONGODB_URI);
+console.log("DB_NAME =", process.env.DB_NAME);
+
 class Database {
     /**
      * Constructeur de la class DB
