@@ -1,8 +1,8 @@
 // Import des dépendances
 const express = require('express');
 const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
-const swagger_config = require('./config/swagger_config');
+const swaggerUi = require('swagger-ui-express')
+const swaggerJsdoc = require('swagger-jsdoc')
 require('dotenv').config();
 
 // Import des modules
@@ -12,6 +12,21 @@ const sondesRoutes = require('./routes/sondes');
 // Initialisation de l'api express
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Config swagger
+const swaggerConfig = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "API Mongo",
+            version: "1.0.0",
+            description: "api avec express et mongo"
+        }
+    },
+    apis: ["./routes/*.js"],
+}
+
+const swaggerSpec = swaggerJsdoc(swaggerConfig);
 
 // Config global
 app.use(cors({
@@ -50,3 +65,6 @@ app.get('/', (req, res) => {
 
 // sondes
 app.use('/sondes', sondesRoutes);
+
+// swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
